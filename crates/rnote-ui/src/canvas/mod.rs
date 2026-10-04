@@ -220,7 +220,7 @@ mod imp {
             obj.set_can_focus(true);
             obj.set_focusable(true);
 
-            obj.set_cursor(Some(&*self.regular_cursor.borrow()));
+            // obj.set_cursor(Some(&*self.regular_cursor.borrow())); // tt - disable cursor setting due to lag
 
             obj.add_controller(self.pointer_controller.clone());
             obj.add_controller(self.key_controller.clone());
@@ -396,13 +396,15 @@ mod imp {
                     self.show_drawing_cursor.replace(show_drawing_cursor);
 
                     if self.drawing_cursor_enabled.get() {
+                        /*
                         if show_drawing_cursor {
                             obj.set_cursor(Some(&*self.drawing_cursor.borrow()));
                         } else {
                             obj.set_cursor(Some(&*self.invisible_cursor.borrow()));
                         }
+                        */ // tt - disable cursor setting due to lag
                     } else {
-                        obj.set_cursor(Some(&*self.regular_cursor.borrow()));
+                        // obj.set_cursor(Some(&*self.regular_cursor.borrow())); // tt - disable cursor setting due to lag
                     }
                 }
                 "regular-cursor" => {
@@ -425,7 +427,7 @@ mod imp {
 
                     self.regular_cursor.replace(cursor);
 
-                    obj.set_cursor(Some(&*self.regular_cursor.borrow()));
+                    // obj.set_cursor(Some(&*self.regular_cursor.borrow())); // tt - disable cursor setting due to lag
                 }
                 "drawing-cursor" => {
                     let icon_name = value.get().unwrap();
@@ -992,13 +994,15 @@ impl RnCanvas {
         self.imp().drawing_cursor_enabled.set(drawing_cursor);
 
         if drawing_cursor {
+            /*
             if self.imp().show_drawing_cursor.get() {
                 self.set_cursor(Some(&*self.imp().drawing_cursor.borrow()));
             } else {
                 self.set_cursor(Some(&*self.imp().invisible_cursor.borrow()));
             }
+            */ // tt - disable cursor setting due to lag
         } else {
-            self.set_cursor(Some(&*self.imp().regular_cursor.borrow()));
+            // self.set_cursor(Some(&*self.imp().regular_cursor.borrow())); // tt - disable cursor setting due to lag
         }
     }
 
